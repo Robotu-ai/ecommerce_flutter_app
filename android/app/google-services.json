@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "77125335004",
+    "project_id": "dtoro-dev",
+    "storage_bucket": "dtoro-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77125335004:android:e150fab3148c76b6e6c119",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77125335004-m9un6mkcrv46pk4oo9bcesgcm7gtbtp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmLbqlAJ0_Oe-fr1kwdAVIGC_XC6az42w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77125335004-m9un6mkcrv46pk4oo9bcesgcm7gtbtp2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77125335004-logupkr4lreooo5qgai0ul3g4ttebrul.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "us.dtoro.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77125335004:android:1aba0243063ed4ffe6c119",
+        "android_client_info": {
+          "package_name": "us.dtoro.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77125335004-m9un6mkcrv46pk4oo9bcesgcm7gtbtp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmLbqlAJ0_Oe-fr1kwdAVIGC_XC6az42w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77125335004-m9un6mkcrv46pk4oo9bcesgcm7gtbtp2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77125335004-logupkr4lreooo5qgai0ul3g4ttebrul.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "us.dtoro.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
