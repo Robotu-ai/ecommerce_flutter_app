@@ -12,12 +12,13 @@ class CatalogContent extends StatelessWidget {
         'types': [
           {'label': 'Beef', 'image': 'assets/images/beef.png'},
           {'label': 'Pork', 'image': 'assets/images/pork.png'},
-          {'label': 'Lamb', 'image': 'assets/images/lamb.png'},
-          {'label': 'Goat', 'image': 'assets/images/goat.png'},
-          {'label': 'Veal', 'image': 'assets/images/veal.png'},
-          {'label': 'Venison', 'image': 'assets/images/venison.png'},
-          {'label': 'Bison', 'image': 'assets/images/bison.png'},
-          {'label': 'Rabbit', 'image': 'assets/images/rabbit.png'},
+          {'label': 'Buffalo', 'image': 'assets/images/buffalo.png'},
+          {'label': 'Lamb', 'image': 'assets/images/buffalo.png'},
+          {'label': 'Goat', 'image': 'assets/images/buffalo.png'},
+          {'label': 'Veal', 'image': 'assets/images/buffalo.png'},
+          {'label': 'Venison', 'image': 'assets/images/buffalo.png'},
+          {'label': 'Bison', 'image': 'assets/images/buffalo.png'},
+          {'label': 'Rabbit', 'image': 'assets/images/buffalo.png'},
         ],
       },
       {
@@ -26,20 +27,21 @@ class CatalogContent extends StatelessWidget {
           {'label': 'Chicken', 'image': 'assets/images/chicken.png'},
           {'label': 'Turkey', 'image': 'assets/images/turkey.png'},
           {'label': 'Duck', 'image': 'assets/images/duck.png'},
-          {'label': 'Quail', 'image': 'assets/images/quail.png'},
-          {'label': 'Goose', 'image': 'assets/images/goose.png'},
+          {'label': 'Quail', 'image': 'assets/images/duck.png'},
+          {'label': 'Goose', 'image': 'assets/images/duck.png'},
         ],
       },
       {
         'title': 'Fish and Seafood',
         'types': [
-          {'label': 'Salmon', 'image': 'assets/images/salmon.png'},
           {'label': 'Tuna', 'image': 'assets/images/tuna.png'},
-          {'label': 'Shrimp', 'image': 'assets/images/shrimp.png'},
           {'label': 'Lobster', 'image': 'assets/images/lobster.png'},
-          {'label': 'Crab', 'image': 'assets/images/crab.png'},
-          {'label': 'Oyster', 'image': 'assets/images/oyster.png'},
-          {'label': 'Clam', 'image': 'assets/images/clam.png'},
+          {'label': 'Cod', 'image': 'assets/images/cod.png'},
+          {'label': 'Salmon', 'image': 'assets/images/cod.png'},
+          {'label': 'Shrimp', 'image': 'assets/images/cod.png'},
+          {'label': 'Crab', 'image': 'assets/images/cod.png'},
+          {'label': 'Oyster', 'image': 'assets/images/cod.png'},
+          {'label': 'Clam', 'image': 'assets/images/cod.png'},
         ],
       },
     ];
@@ -76,7 +78,7 @@ class CatalogContent extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               SizedBox(
-                height: 120,
+                height: 160,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: types.length,
@@ -87,7 +89,7 @@ class CatalogContent extends StatelessWidget {
                       children: [
                         Container(
                           width: 80,
-                          height: 80,
+                          height: 120,
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(12),
