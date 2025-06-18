@@ -33,7 +33,7 @@ class AppLogger {
   static void error(
     Object? message,
     [Object? error,
-    StackTrace? stackTrace],
+    StackTrace? stackTrace]
   ) {
     developer.log(message.toString(), name: 'ERROR', level: 1000);
     if (error != null || stackTrace != null) {
