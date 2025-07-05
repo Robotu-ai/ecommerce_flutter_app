@@ -284,7 +284,8 @@ extension BestPricePatterns on BestPrice {
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _BestPrice extends BestPrice {
   const _BestPrice(
       {required this.sellerId,
@@ -420,15 +421,17 @@ class __$BestPriceCopyWithImpl<$Res> implements _$BestPriceCopyWith<$Res> {
 
 /// @nodoc
 mixin _$ProductReferenceModel {
-  String get id; // productRefId
+  String get id; // productRefId
   String get name;
   String get categoryId;
+  String get subCategoryId;
   String get description;
   String get imageUrl;
   UnitType get unitType;
   CatalogState get catalogState;
   num get catalogPriority;
-  BestPrice? get bestPrice;
+  BestPrice get bestPrice;
+  String? get label;
   @TimestampConverter()
   Timestamp get createdAt;
 
@@ -452,6 +455,8 @@ mixin _$ProductReferenceModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
+            (identical(other.subCategoryId, subCategoryId) ||
+                other.subCategoryId == subCategoryId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -464,6 +469,7 @@ mixin _$ProductReferenceModel {
                 other.catalogPriority == catalogPriority) &&
             (identical(other.bestPrice, bestPrice) ||
                 other.bestPrice == bestPrice) &&
+            (identical(other.label, label) || other.label == label) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -475,17 +481,19 @@ mixin _$ProductReferenceModel {
       id,
       name,
       categoryId,
+      subCategoryId,
       description,
       imageUrl,
       unitType,
       catalogState,
       catalogPriority,
       bestPrice,
+      label,
       createdAt);
 
   @override
   String toString() {
-    return 'ProductReferenceModel(id: $id, name: $name, categoryId: $categoryId, description: $description, imageUrl: $imageUrl, unitType: $unitType, catalogState: $catalogState, catalogPriority: $catalogPriority, bestPrice: $bestPrice, createdAt: $createdAt)';
+    return 'ProductReferenceModel(id: $id, name: $name, categoryId: $categoryId, subCategoryId: $subCategoryId, description: $description, imageUrl: $imageUrl, unitType: $unitType, catalogState: $catalogState, catalogPriority: $catalogPriority, bestPrice: $bestPrice, label: $label, createdAt: $createdAt)';
   }
 }
 
@@ -499,15 +507,17 @@ abstract mixin class $ProductReferenceModelCopyWith<$Res> {
       {String id,
       String name,
       String categoryId,
+      String subCategoryId,
       String description,
       String imageUrl,
       UnitType unitType,
       CatalogState catalogState,
       num catalogPriority,
-      BestPrice? bestPrice,
+      BestPrice bestPrice,
+      String? label,
       @TimestampConverter() Timestamp createdAt});
 
-  $BestPriceCopyWith<$Res>? get bestPrice;
+  $BestPriceCopyWith<$Res> get bestPrice;
 }
 
 /// @nodoc
@@ -526,12 +536,14 @@ class _$ProductReferenceModelCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? categoryId = null,
+    Object? subCategoryId = null,
     Object? description = null,
     Object? imageUrl = null,
     Object? unitType = null,
     Object? catalogState = null,
     Object? catalogPriority = null,
-    Object? bestPrice = freezed,
+    Object? bestPrice = null,
+    Object? label = freezed,
     Object? createdAt = null,
   }) {
     return _then(_self.copyWith(
@@ -546,6 +558,10 @@ class _$ProductReferenceModelCopyWithImpl<$Res>
       categoryId: null == categoryId
           ? _self.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      subCategoryId: null == subCategoryId
+          ? _self.subCategoryId
+          : subCategoryId // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
           ? _self.description
@@ -567,10 +583,14 @@ class _$ProductReferenceModelCopyWithImpl<$Res>
           ? _self.catalogPriority
           : catalogPriority // ignore: cast_nullable_to_non_nullable
               as num,
-      bestPrice: freezed == bestPrice
+      bestPrice: null == bestPrice
           ? _self.bestPrice
           : bestPrice // ignore: cast_nullable_to_non_nullable
-              as BestPrice?,
+              as BestPrice,
+      label: freezed == label
+          ? _self.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -582,12 +602,8 @@ class _$ProductReferenceModelCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $BestPriceCopyWith<$Res>? get bestPrice {
-    if (_self.bestPrice == null) {
-      return null;
-    }
-
-    return $BestPriceCopyWith<$Res>(_self.bestPrice!, (value) {
+  $BestPriceCopyWith<$Res> get bestPrice {
+    return $BestPriceCopyWith<$Res>(_self.bestPrice, (value) {
       return _then(_self.copyWith(bestPrice: value));
     });
   }
@@ -688,12 +704,14 @@ extension ProductReferenceModelPatterns on ProductReferenceModel {
             String id,
             String name,
             String categoryId,
+            String subCategoryId,
             String description,
             String imageUrl,
             UnitType unitType,
             CatalogState catalogState,
             num catalogPriority,
-            BestPrice? bestPrice,
+            BestPrice bestPrice,
+            String? label,
             @TimestampConverter() Timestamp createdAt)?
         $default, {
     required TResult orElse(),
@@ -705,12 +723,14 @@ extension ProductReferenceModelPatterns on ProductReferenceModel {
             _that.id,
             _that.name,
             _that.categoryId,
+            _that.subCategoryId,
             _that.description,
             _that.imageUrl,
             _that.unitType,
             _that.catalogState,
             _that.catalogPriority,
             _that.bestPrice,
+            _that.label,
             _that.createdAt);
       case _:
         return orElse();
@@ -736,12 +756,14 @@ extension ProductReferenceModelPatterns on ProductReferenceModel {
             String id,
             String name,
             String categoryId,
+            String subCategoryId,
             String description,
             String imageUrl,
             UnitType unitType,
             CatalogState catalogState,
             num catalogPriority,
-            BestPrice? bestPrice,
+            BestPrice bestPrice,
+            String? label,
             @TimestampConverter() Timestamp createdAt)
         $default,
   ) {
@@ -752,12 +774,14 @@ extension ProductReferenceModelPatterns on ProductReferenceModel {
             _that.id,
             _that.name,
             _that.categoryId,
+            _that.subCategoryId,
             _that.description,
             _that.imageUrl,
             _that.unitType,
             _that.catalogState,
             _that.catalogPriority,
             _that.bestPrice,
+            _that.label,
             _that.createdAt);
     }
   }
@@ -780,12 +804,14 @@ extension ProductReferenceModelPatterns on ProductReferenceModel {
             String id,
             String name,
             String categoryId,
+            String subCategoryId,
             String description,
             String imageUrl,
             UnitType unitType,
             CatalogState catalogState,
             num catalogPriority,
-            BestPrice? bestPrice,
+            BestPrice bestPrice,
+            String? label,
             @TimestampConverter() Timestamp createdAt)?
         $default,
   ) {
@@ -796,12 +822,14 @@ extension ProductReferenceModelPatterns on ProductReferenceModel {
             _that.id,
             _that.name,
             _that.categoryId,
+            _that.subCategoryId,
             _that.description,
             _that.imageUrl,
             _that.unitType,
             _that.catalogState,
             _that.catalogPriority,
             _that.bestPrice,
+            _that.label,
             _that.createdAt);
       case _:
         return null;
@@ -810,18 +838,21 @@ extension ProductReferenceModelPatterns on ProductReferenceModel {
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _ProductReferenceModel extends ProductReferenceModel {
   const _ProductReferenceModel(
       {required this.id,
       required this.name,
       required this.categoryId,
+      required this.subCategoryId,
       required this.description,
       required this.imageUrl,
       required this.unitType,
       required this.catalogState,
       required this.catalogPriority,
-      this.bestPrice,
+      required this.bestPrice,
+      required this.label,
       @TimestampConverter() required this.createdAt})
       : super._();
   factory _ProductReferenceModel.fromJson(Map<String, dynamic> json) =>
@@ -829,11 +860,13 @@ class _ProductReferenceModel extends ProductReferenceModel {
 
   @override
   final String id;
-// productRefId
+// productRefId
   @override
   final String name;
   @override
   final String categoryId;
+  @override
+  final String subCategoryId;
   @override
   final String description;
   @override
@@ -845,7 +878,9 @@ class _ProductReferenceModel extends ProductReferenceModel {
   @override
   final num catalogPriority;
   @override
-  final BestPrice? bestPrice;
+  final BestPrice bestPrice;
+  @override
+  final String? label;
   @override
   @TimestampConverter()
   final Timestamp createdAt;
@@ -875,6 +910,8 @@ class _ProductReferenceModel extends ProductReferenceModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
+            (identical(other.subCategoryId, subCategoryId) ||
+                other.subCategoryId == subCategoryId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -887,6 +924,7 @@ class _ProductReferenceModel extends ProductReferenceModel {
                 other.catalogPriority == catalogPriority) &&
             (identical(other.bestPrice, bestPrice) ||
                 other.bestPrice == bestPrice) &&
+            (identical(other.label, label) || other.label == label) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -898,17 +936,19 @@ class _ProductReferenceModel extends ProductReferenceModel {
       id,
       name,
       categoryId,
+      subCategoryId,
       description,
       imageUrl,
       unitType,
       catalogState,
       catalogPriority,
       bestPrice,
+      label,
       createdAt);
 
   @override
   String toString() {
-    return 'ProductReferenceModel(id: $id, name: $name, categoryId: $categoryId, description: $description, imageUrl: $imageUrl, unitType: $unitType, catalogState: $catalogState, catalogPriority: $catalogPriority, bestPrice: $bestPrice, createdAt: $createdAt)';
+    return 'ProductReferenceModel(id: $id, name: $name, categoryId: $categoryId, subCategoryId: $subCategoryId, description: $description, imageUrl: $imageUrl, unitType: $unitType, catalogState: $catalogState, catalogPriority: $catalogPriority, bestPrice: $bestPrice, label: $label, createdAt: $createdAt)';
   }
 }
 
@@ -924,16 +964,18 @@ abstract mixin class _$ProductReferenceModelCopyWith<$Res>
       {String id,
       String name,
       String categoryId,
+      String subCategoryId,
       String description,
       String imageUrl,
       UnitType unitType,
       CatalogState catalogState,
       num catalogPriority,
-      BestPrice? bestPrice,
+      BestPrice bestPrice,
+      String? label,
       @TimestampConverter() Timestamp createdAt});
 
   @override
-  $BestPriceCopyWith<$Res>? get bestPrice;
+  $BestPriceCopyWith<$Res> get bestPrice;
 }
 
 /// @nodoc
@@ -952,12 +994,14 @@ class __$ProductReferenceModelCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? categoryId = null,
+    Object? subCategoryId = null,
     Object? description = null,
     Object? imageUrl = null,
     Object? unitType = null,
     Object? catalogState = null,
     Object? catalogPriority = null,
-    Object? bestPrice = freezed,
+    Object? bestPrice = null,
+    Object? label = freezed,
     Object? createdAt = null,
   }) {
     return _then(_ProductReferenceModel(
@@ -972,6 +1016,10 @@ class __$ProductReferenceModelCopyWithImpl<$Res>
       categoryId: null == categoryId
           ? _self.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      subCategoryId: null == subCategoryId
+          ? _self.subCategoryId
+          : subCategoryId // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
           ? _self.description
@@ -993,10 +1041,14 @@ class __$ProductReferenceModelCopyWithImpl<$Res>
           ? _self.catalogPriority
           : catalogPriority // ignore: cast_nullable_to_non_nullable
               as num,
-      bestPrice: freezed == bestPrice
+      bestPrice: null == bestPrice
           ? _self.bestPrice
           : bestPrice // ignore: cast_nullable_to_non_nullable
-              as BestPrice?,
+              as BestPrice,
+      label: freezed == label
+          ? _self.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -1008,12 +1060,8 @@ class __$ProductReferenceModelCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $BestPriceCopyWith<$Res>? get bestPrice {
-    if (_self.bestPrice == null) {
-      return null;
-    }
-
-    return $BestPriceCopyWith<$Res>(_self.bestPrice!, (value) {
+  $BestPriceCopyWith<$Res> get bestPrice {
+    return $BestPriceCopyWith<$Res>(_self.bestPrice, (value) {
       return _then(_self.copyWith(bestPrice: value));
     });
   }

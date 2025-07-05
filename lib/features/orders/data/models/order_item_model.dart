@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dtoro/core/converters/unit_type_converter.dart';
+import 'package:dtoro/core/enums/unit_type.dart';
 
 part 'order_item_model.freezed.dart';
 part 'order_item_model.g.dart';

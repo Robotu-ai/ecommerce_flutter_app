@@ -31,14 +31,14 @@ _ProductReferenceModel _$ProductReferenceModelFromJson(
       id: json['id'] as String,
       name: json['name'] as String,
       categoryId: json['categoryId'] as String,
+      subCategoryId: json['subCategoryId'] as String,
       description: json['description'] as String,
       imageUrl: json['imageUrl'] as String,
       unitType: $enumDecode(_$UnitTypeEnumMap, json['unitType']),
       catalogState: $enumDecode(_$CatalogStateEnumMap, json['catalogState']),
       catalogPriority: json['catalogPriority'] as num,
-      bestPrice: json['bestPrice'] == null
-          ? null
-          : BestPrice.fromJson(json['bestPrice'] as Map<String, dynamic>),
+      bestPrice: BestPrice.fromJson(json['bestPrice'] as Map<String, dynamic>),
+      label: json['label'] as String?,
       createdAt:
           const TimestampConverter().fromJson(json['createdAt'] as Object),
     );
@@ -49,12 +49,14 @@ Map<String, dynamic> _$ProductReferenceModelToJson(
       'id': instance.id,
       'name': instance.name,
       'categoryId': instance.categoryId,
+      'subCategoryId': instance.subCategoryId,
       'description': instance.description,
       'imageUrl': instance.imageUrl,
       'unitType': _$UnitTypeEnumMap[instance.unitType]!,
       'catalogState': _$CatalogStateEnumMap[instance.catalogState]!,
       'catalogPriority': instance.catalogPriority,
-      'bestPrice': instance.bestPrice,
+      'bestPrice': instance.bestPrice.toJson(),
+      'label': instance.label,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
     };
 

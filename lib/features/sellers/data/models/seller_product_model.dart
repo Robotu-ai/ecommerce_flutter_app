@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:dtoro/core/converters/unit_type_converter.dart';
+import 'package:dtoro/core/enums/unit_type.dart';
 import 'package:dtoro/core/converters/timestamp_converter.dart';
 
 part 'seller_product_model.freezed.dart';
