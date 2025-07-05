@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dtoro/features/catalog/catalog_content.dart'; // Contenido catálogo (categorías, banners)
+import 'package:dtoro/features/catalog/presentation/pages/catalog_content.dart'; // Contenido catálogo (categorías, banners)
 import 'package:dtoro/features/search/search_content.dart';   // Contenido búsqueda (resultados, recientes)
 import 'package:dtoro/features/cart/cart_screen.dart';
 import 'package:dtoro/features/orders/orders_screen.dart';
