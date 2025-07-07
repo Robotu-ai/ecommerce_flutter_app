@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CartItemModel {
-  String get id; // sellerProductId
+  String get id; // sellerProductId
   String get sellerProductId;
   num get quantity;
 
@@ -260,7 +260,7 @@ class _CartItemModel extends CartItemModel {
 
   @override
   final String id;
-// sellerProductId
+// sellerProductId
   @override
   final String sellerProductId;
   @override
