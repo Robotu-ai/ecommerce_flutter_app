@@ -2,7 +2,7 @@
 // lib/features/cart/domain/entities/cart.dart
 
 import 'package:equatable/equatable.dart';
-import 'cart_status_entity.dart';
+import 'cart_status.dart';
 
 class Cart extends Equatable {
   final String id;

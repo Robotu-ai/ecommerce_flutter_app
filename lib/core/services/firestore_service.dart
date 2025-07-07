@@ -1,5 +1,6 @@
 // lib/core/services/firestore_service.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 /// A thin, type‑safe wrapper over [FirebaseFirestore].
 ///
@@ -82,4 +83,15 @@ class FirestoreService {
   /// Runs a transaction and returns a typed result.
   Future<T> runTransaction<T>(TransactionHandler<T> handler) =>
       _db.runTransaction(handler);
+
+  // Run Cloud Functions 
+  final FirebaseFunctions _functions = FirebaseFunctions.instance;
+
+  Future<HttpsCallableResult> callCloudFunction(
+    String functionName,
+    Map<String, dynamic> parameters,
+  ) async {
+    final callable = _functions.httpsCallable(functionName);
+    return await callable.call(parameters);
+  }
 }
