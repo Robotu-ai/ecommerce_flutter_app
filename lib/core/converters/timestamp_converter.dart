@@ -29,7 +29,7 @@ class TimestampConverter implements JsonConverter<Timestamp, Object> {
 
   @override
   Object toJson(Timestamp timestamp) {
-    // Para Firestore, devolver el propio Timestamp
-    return timestamp;
+    // Devuelve un string ISO8601 para serializar en JSON
+    return timestamp.toDate().toIso8601String();
   }
 }

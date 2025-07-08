@@ -1,8 +1,8 @@
-import 'package:dtoro/features/auth/presentation/pages/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dtoro/core/di/injector.dart';
 import 'package:dtoro/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:dtoro/features/auth/presentation/widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -22,8 +22,12 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Esta propiedad es clave para que el Scaffold se redimensione
+      // cuando el teclado virtual aparece. Por defecto es true, pero es bueno confirmarlo.
+      resizeToAvoidBottomInset: true, 
       body: SafeArea(
-        child: Padding(
+        // Envuelve el contenido principal en un SingleChildScrollView
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +68,11 @@ class LoginView extends StatelessWidget {
               
               // Formulario de login
               const LoginForm(),
+
+              // Añade un espacio extra al final para asegurar que el último campo
+              // no quede oculto por el teclado, si es necesario.
+              // Puedes ajustar este valor o eliminarlo si no es necesario.
+              const SizedBox(height: 50), 
             ],
           ),
         ),

@@ -5,7 +5,6 @@ import 'package:dtoro/features/user/domain/entities/user_entity.dart';
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
-
 @freezed
 sealed class UserModel with _$UserModel {
   const UserModel._();
@@ -25,11 +24,13 @@ sealed class UserModel with _$UserModel {
 
   factory UserModel.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> doc,
-  ) =>
-      UserModel.fromJson({
-        'id': doc.id,
-        ...doc.data()!,
-      });
+  ) {
+    final data = doc.data();
+    return UserModel.fromJson({
+      'id': doc.id,
+      ...?data,
+    });
+  }
 
   Map<String, Object?> toDocument() => toJson()..remove('id');
 
