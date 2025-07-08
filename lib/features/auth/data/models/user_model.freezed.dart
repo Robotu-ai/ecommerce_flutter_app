@@ -14,11 +14,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$UserModel {
-  String get id; // ← docId (“chefCarlos”)
+  String get id;
   String get displayName;
   String get email;
   UserRole get role;
-  String? get companyId; // solo para sellers
+  String? get companyId;
   @TimestampConverter()
   Timestamp get createdAt;
 
@@ -304,7 +304,6 @@ class _UserModel extends UserModel {
 
   @override
   final String id;
-// ← docId (“chefCarlos”)
   @override
   final String displayName;
   @override
@@ -313,7 +312,6 @@ class _UserModel extends UserModel {
   final UserRole role;
   @override
   final String? companyId;
-// solo para sellers
   @override
   @TimestampConverter()
   final Timestamp createdAt;
