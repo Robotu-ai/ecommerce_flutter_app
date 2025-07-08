@@ -1,3 +1,7 @@
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dtoro/core/network/network_info.dart' show NetworkInfo;
+import 'package:dtoro/core/network/network_info_impl.dart';
 import 'package:dtoro/core/services/auth_service.dart';
 import 'package:dtoro/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:dtoro/features/auth/data/datasources/auth_remote_datasource.dart';
@@ -7,6 +11,11 @@ import 'package:dtoro/features/auth/domain/usecases/get_auth_state_usecase.dart'
 import 'package:dtoro/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:dtoro/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:dtoro/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:dtoro/features/cart/data/datasources/cart_remote_datasource.dart';
+import 'package:dtoro/features/cart/data/repositories/cart_repository_impl.dart';
+import 'package:dtoro/features/cart/domain/repositories/cart_repository.dart';
+import 'package:dtoro/features/cart/domain/usecases/watch_cart_with_items.dart';
+import 'package:dtoro/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:dtoro/features/catalog/data/datasources/category_remote_ds.dart';
 import 'package:dtoro/features/catalog/data/datasources/subcategory_remote_ds.dart';
 import 'package:dtoro/features/catalog/data/repositories/category_repository_impl.dart';
@@ -31,8 +40,11 @@ final getIt = GetIt.instance;
 Future<void> initDependencies() async {
   // --- servicios core ---
   getIt.registerLazySingleton<FirestoreService>(
-    () => FirestoreService(FirebaseFirestore.instance),
+    () => FirestoreService(getIt<FirebaseFirestore>()),
   );
+  
+  getIt.registerLazySingleton<Connectivity>(() => Connectivity());
+  getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt<Connectivity>()));
 
   // --- catalog ---
   getIt.registerLazySingleton<CatalogRemoteDataSource>(
@@ -53,7 +65,7 @@ Future<void> initDependencies() async {
   );
   getIt.registerFactory(() => GetCategories(getIt<CategoryRepository>()));
 
-    // Subcategorías
+  // Subcategorías
   getIt.registerLazySingleton<SubcategoryRemoteDataSource>(
     () => SubcategoryRemoteDataSourceImpl(getIt<FirestoreService>()),
   );
@@ -64,21 +76,22 @@ Future<void> initDependencies() async {
 
   // Productos por sub‑categoría
   getIt.registerFactory(
-      () => GetProductsBySubcategory(getIt<CatalogRepository>()));
+    () => GetProductsBySubcategory(getIt<CatalogRepository>()),
+  );
 
-  // Authentication ...
-
-  // External dependencies
+  // --- external dependencies ---
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
+  getIt.registerLazySingleton<FirebaseFunctions>(() => FirebaseFunctions.instance);
 
-  // Core services
+  // --- core services ---
   getIt.registerLazySingleton<AuthService>(
     () => AuthService(getIt<FirebaseAuth>()),
   );
 
+  // --- auth ---
   // Data sources
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(getIt<AuthService>()),
@@ -86,7 +99,6 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<AuthLocalDataSource>(
     () => AuthLocalDataSourceImpl(getIt<SharedPreferences>()),
   );
-
   // Repositories
   getIt.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
@@ -95,7 +107,6 @@ Future<void> initDependencies() async {
       getIt<FirebaseFirestore>(),
     ),
   );
-
   // Use cases
   getIt.registerLazySingleton<SignInUseCase>(
     () => SignInUseCase(getIt<AuthRepository>()),
@@ -106,13 +117,39 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<GetAuthStateUseCase>(
     () => GetAuthStateUseCase(getIt<AuthRepository>()),
   );
-
   // Cubits
   getIt.registerFactory<AuthCubit>(
     () => AuthCubit(
       getIt<GetAuthStateUseCase>(),
       getIt<SignInUseCase>(),
       getIt<SignOutUseCase>(),
+    ),
+  );
+
+  // --- cart ---
+  // DataSource
+  getIt.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(
+      getIt<FirestoreService>(),
+      functions: getIt<FirebaseFunctions>(),
+    ),
+  );
+  // Repository
+  getIt.registerLazySingleton<CartRepository>(
+    () => CartRepositoryImpl(
+      remoteDataSource: getIt<CartRemoteDataSource>(),
+      networkInfo: getIt<NetworkInfo>(),
+    ),
+  );
+  // UseCase
+  getIt.registerLazySingleton<WatchCartWithItems>(
+    () => WatchCartWithItems(getIt<CartRepository>()),
+  );
+  // Cubit
+  getIt.registerFactory<CartCubit>(
+    () => CartCubit(
+      authRepository: getIt<AuthRepository>(),
+      watchCartWithItems: getIt<WatchCartWithItems>(),
     ),
   );
 }

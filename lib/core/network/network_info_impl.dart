@@ -1,4 +1,5 @@
 // lib/core/network/network_info_impl.dart
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'network_info.dart';
 
@@ -10,30 +11,26 @@ class NetworkInfoImpl implements NetworkInfo {
   @override
   Future<bool> get isConnected async {
     final result = await connectivity.checkConnectivity();
-    return result != ConnectivityResult.none;
+    // Considera conectado si es wifi o mobile
+    return [ConnectivityResult.wifi, ConnectivityResult.mobile].contains(result);
   }
 
-  /// Stream to listen to connectivity changes
-  Stream<bool> get onConnectivityChanged {
-    return connectivity.onConnectivityChanged.map(
-      (result) => result != ConnectivityResult.none,
-    );
-  }
+  Stream<bool> get onConnectivityChanged =>
+      connectivity.onConnectivityChanged.map(
+        (result) => [ConnectivityResult.wifi, ConnectivityResult.mobile].contains(result),
+      );
 
-  /// Check if connected to WiFi
   Future<bool> get isConnectedToWiFi async {
     final result = await connectivity.checkConnectivity();
     return result == ConnectivityResult.wifi;
   }
 
-  /// Check if connected to mobile data
   Future<bool> get isConnectedToMobile async {
     final result = await connectivity.checkConnectivity();
     return result == ConnectivityResult.mobile;
   }
 
-  /// Get current connectivity type
-  Future<ConnectivityResult> get connectivityType async {
+  Future<List<ConnectivityResult>> get connectivityType async {
     return await connectivity.checkConnectivity();
   }
 }

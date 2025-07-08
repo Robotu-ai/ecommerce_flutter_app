@@ -1,3 +1,4 @@
+import 'package:dtoro/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dtoro/core/di/injector.dart';
@@ -18,7 +19,11 @@ class AppRouter extends StatelessWidget {
           if (state is AuthStateInitial || state is AuthStateLoading) {
             return const SplashScreen();
           } else if (state is AuthStateAuthenticated) {
-            return const HomeWrapper();
+            // Provee el CartCubit SOLO en la zona privada
+            return BlocProvider<CartCubit>(
+              create: (_) => getIt<CartCubit>(),
+              child: const HomeWrapper(),
+            );
           } else {
             return const LoginPage();
           }

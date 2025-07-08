@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dtoro/core/router/app_router.dart';
+import 'package:dtoro/router/app_router.dart';
 import 'core/theme.dart';
 
 class DToroApp extends StatelessWidget {

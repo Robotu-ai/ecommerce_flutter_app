@@ -1,3 +1,4 @@
+// lib/features/auth/domain/entities/auth_state.dart
 import 'package:equatable/equatable.dart';
 import 'package:dtoro/features/user/domain/entities/user_entity.dart';
 
