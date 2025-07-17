@@ -11,7 +11,7 @@ import 'core/firebase_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initDependencies();    // ← Registra todos tus servicios, repos, use-cases…
+  await initDependencies();    // ← Registra todos tus servicios, repos, use-cases…
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

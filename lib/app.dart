@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:dtoro/router/app_router.dart';
 import 'core/theme.dart';
-import 'home_wrapper.dart';
 
 class DToroApp extends StatelessWidget {
   const DToroApp({super.key});
@@ -12,7 +12,7 @@ class DToroApp extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.light,
       themeMode: ThemeMode.system,
-      home: const HomeWrapper(),
+      home: const AppRouter(),
       debugShowCheckedModeBanner: false,
     );
   }

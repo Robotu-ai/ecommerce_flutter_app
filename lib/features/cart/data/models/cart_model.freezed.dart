@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CartModel {
-  String get id; // ${userId}_<status>
+  String get id; // ${userId}_<status>
   String get userId;
   String get zoneId;
   CartStatus get status;
   @TimestampConverter()
-  Timestamp get createdAt;
+  Timestamp get updatedAt;
 
   /// Create a copy of CartModel
   /// with the given fields replaced by the non-null parameter values.
@@ -40,18 +40,18 @@ mixin _$CartModel {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.zoneId, zoneId) || other.zoneId == zoneId) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, userId, zoneId, status, createdAt);
+      Object.hash(runtimeType, id, userId, zoneId, status, updatedAt);
 
   @override
   String toString() {
-    return 'CartModel(id: $id, userId: $userId, zoneId: $zoneId, status: $status, createdAt: $createdAt)';
+    return 'CartModel(id: $id, userId: $userId, zoneId: $zoneId, status: $status, updatedAt: $updatedAt)';
   }
 }
 
@@ -65,7 +65,7 @@ abstract mixin class $CartModelCopyWith<$Res> {
       String userId,
       String zoneId,
       CartStatus status,
-      @TimestampConverter() Timestamp createdAt});
+      @TimestampConverter() Timestamp updatedAt});
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class _$CartModelCopyWithImpl<$Res> implements $CartModelCopyWith<$Res> {
     Object? userId = null,
     Object? zoneId = null,
     Object? status = null,
-    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -103,9 +103,9 @@ class _$CartModelCopyWithImpl<$Res> implements $CartModelCopyWith<$Res> {
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as CartStatus,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp,
     ));
   }
@@ -203,7 +203,7 @@ extension CartModelPatterns on CartModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String id, String userId, String zoneId, CartStatus status,
-            @TimestampConverter() Timestamp createdAt)?
+            @TimestampConverter() Timestamp updatedAt)?
         $default, {
     required TResult orElse(),
   }) {
@@ -211,7 +211,7 @@ extension CartModelPatterns on CartModel {
     switch (_that) {
       case _CartModel() when $default != null:
         return $default(_that.id, _that.userId, _that.zoneId, _that.status,
-            _that.createdAt);
+            _that.updatedAt);
       case _:
         return orElse();
     }
@@ -233,14 +233,14 @@ extension CartModelPatterns on CartModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String id, String userId, String zoneId, CartStatus status,
-            @TimestampConverter() Timestamp createdAt)
+            @TimestampConverter() Timestamp updatedAt)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CartModel():
         return $default(_that.id, _that.userId, _that.zoneId, _that.status,
-            _that.createdAt);
+            _that.updatedAt);
     }
   }
 
@@ -259,14 +259,14 @@ extension CartModelPatterns on CartModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(String id, String userId, String zoneId,
-            CartStatus status, @TimestampConverter() Timestamp createdAt)?
+            CartStatus status, @TimestampConverter() Timestamp updatedAt)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CartModel() when $default != null:
         return $default(_that.id, _that.userId, _that.zoneId, _that.status,
-            _that.createdAt);
+            _that.updatedAt);
       case _:
         return null;
     }
@@ -281,14 +281,14 @@ class _CartModel extends CartModel {
       required this.userId,
       required this.zoneId,
       required this.status,
-      @TimestampConverter() required this.createdAt})
+      @TimestampConverter() required this.updatedAt})
       : super._();
   factory _CartModel.fromJson(Map<String, dynamic> json) =>
       _$CartModelFromJson(json);
 
   @override
   final String id;
-// ${userId}_<status>
+// ${userId}_<status>
   @override
   final String userId;
   @override
@@ -297,7 +297,7 @@ class _CartModel extends CartModel {
   final CartStatus status;
   @override
   @TimestampConverter()
-  final Timestamp createdAt;
+  final Timestamp updatedAt;
 
   /// Create a copy of CartModel
   /// with the given fields replaced by the non-null parameter values.
@@ -323,18 +323,18 @@ class _CartModel extends CartModel {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.zoneId, zoneId) || other.zoneId == zoneId) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, userId, zoneId, status, createdAt);
+      Object.hash(runtimeType, id, userId, zoneId, status, updatedAt);
 
   @override
   String toString() {
-    return 'CartModel(id: $id, userId: $userId, zoneId: $zoneId, status: $status, createdAt: $createdAt)';
+    return 'CartModel(id: $id, userId: $userId, zoneId: $zoneId, status: $status, updatedAt: $updatedAt)';
   }
 }
 
@@ -351,7 +351,7 @@ abstract mixin class _$CartModelCopyWith<$Res>
       String userId,
       String zoneId,
       CartStatus status,
-      @TimestampConverter() Timestamp createdAt});
+      @TimestampConverter() Timestamp updatedAt});
 }
 
 /// @nodoc
@@ -370,7 +370,7 @@ class __$CartModelCopyWithImpl<$Res> implements _$CartModelCopyWith<$Res> {
     Object? userId = null,
     Object? zoneId = null,
     Object? status = null,
-    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_CartModel(
       id: null == id
@@ -389,9 +389,9 @@ class __$CartModelCopyWithImpl<$Res> implements _$CartModelCopyWith<$Res> {
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as CartStatus,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as Timestamp,
     ));
   }

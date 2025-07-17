@@ -11,8 +11,8 @@ _CartModel _$CartModelFromJson(Map<String, dynamic> json) => _CartModel(
       userId: json['userId'] as String,
       zoneId: json['zoneId'] as String,
       status: $enumDecode(_$CartStatusEnumMap, json['status']),
-      createdAt:
-          const TimestampConverter().fromJson(json['createdAt'] as Object),
+      updatedAt:
+          const TimestampConverter().fromJson(json['updatedAt'] as Object),
     );
 
 Map<String, dynamic> _$CartModelToJson(_CartModel instance) =>
@@ -21,7 +21,7 @@ Map<String, dynamic> _$CartModelToJson(_CartModel instance) =>
       'userId': instance.userId,
       'zoneId': instance.zoneId,
       'status': _$CartStatusEnumMap[instance.status]!,
-      'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
     };
 
 const _$CartStatusEnumMap = {

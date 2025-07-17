@@ -1,3 +1,4 @@
+import 'package:dtoro/features/cart/presentation/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dtoro/features/catalog/presentation/pages/catalog_content.dart'; // Contenido catálogo (categorías, banners)
 import 'package:dtoro/features/search/search_content.dart';   // Contenido búsqueda (resultados, recientes)
@@ -52,7 +53,7 @@ class _HomeWrapperState extends State<HomeWrapper> {
     final List<Widget> mainScreens = [
       // Aquí va el contenido normal del catálogo
       CatalogContent(),
-      CartScreen(),
+      CartPage(),
       OrdersScreen(),
     ];
 
